@@ -1,4 +1,4 @@
-FROM armv7/armhf-ubuntu
+FROM armv7/armhf-debian
 
 LABEL maintainer="Luis Ángel Fernández Fernández <la@zzsoft.es>"
 
@@ -10,12 +10,9 @@ RUN apt -q -y update \
 && apt -q -y -o "DPkg::Options::=--force-confold" -o "DPkg::Options::=--force-confdef" install apt-utils \
 && apt -q -y -o "DPkg::Options::=--force-confold" -o "DPkg::Options::=--force-confdef" dist-upgrade \
 && apt -q -y -o "DPkg::Options::=--force-confold" -o "DPkg::Options::=--force-confdef" install bind9 bind9utils bind9-host man \
-&& apt -q -y -o "DPkg::Options::=--force-confold" -o "DPkg::Options::=--force-confdef" install wget \
-&& wget http://repo.zabbix.com/zabbix/3.4/debian/pool/main/z/zabbix-release/zabbix-release_3.4-1+stretch_all.deb \
-&& dpkg -i zabbix-release_3.4-1+stretch_all.deb \
-&& rm -f zabbix-release_3.4-1+stretch_all.deb \
-&& apt update \
-&& apt -q -y -o "DPkg::Options::=--force-confold" -o "DPkg::Options::=--force-confdef" install zabbix-agent \
+&& apt -q -y -o "DPkg::Options::=--force-confold" -o "DPkg::Options::=--force-confdef" install wget libcurl3 libldap-2.4.2 libodbc1 \
+&& wget https://github.com/imkebe/zabbix3-rpi/raw/master/zabbix-agent_3.0.2-1%2Bjessie_armhf.deb \
+&& dpkg -i zabbix-agent_3.0.2-1+jessie_armhf.deb \
 && apt -q -y autoremove \
 && apt -q -y clean \
 && rm -rf /var/lib/apt/lists/* 
