@@ -13,8 +13,6 @@ RUN apt -q -y update \
 && apt -q -y -o "DPkg::Options::=--force-confold" -o "DPkg::Options::=--force-confdef" install wget libcurl3 libldap-2.4.2 libodbc1 \
 && wget https://github.com/imkebe/zabbix3-rpi/raw/master/zabbix-agent_3.0.2-1%2Bjessie_armhf.deb \
 && dpkg -i zabbix-agent_3.0.2-1+jessie_armhf.deb \
-&& apt -q -y autoremove \
-&& apt -q -y clean \
 && rm -rf /var/lib/apt/lists/* 
 
 CMD ["/usr/sbin/named", "-f", "-u", "bind"]
